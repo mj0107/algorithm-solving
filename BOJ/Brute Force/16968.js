@@ -20,13 +20,8 @@ function solution(testCase) {
     if(current === 'c') multi = maxC;
     else multi = maxD;
 
-    if(current === prev) {
-      multi--;
+    if(current === prev) multi--;
       result *= multi;
-    }
-    else {
-      result *= multi;
-    }
   }
 
   console.log(result);
