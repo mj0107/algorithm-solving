@@ -42,7 +42,7 @@ class PriorityQueue {
       this.queue.push(qElement);
     }
   }
-  dequeue() { // queue의 맨 앞 pop 후 return
+  dequeue() { // queue의 맨 앞(우선순위 제일 높은것) pop 후 return
     if(!this.isEmpty()) return this.queue.shift();
   }
   front() { // 맨 앞 return
@@ -59,7 +59,7 @@ class PriorityQueue {
 function solution(N, D, testInput) {
   // D+1개 만큼 무한대로 초기화
   const dp = Array.from({length: D + 1}, () => Infinity);
-  // D+1개 만큼 빈 배열로 초기화
+  // D+1개 만큼 빈 배열로 초기화 (2차원 배열)
   const edges = Array.from({length: D + 1}, () => []);
   
   for(const row of testInput) {
@@ -69,6 +69,7 @@ function solution(N, D, testInput) {
     // 지름길의 길이가 그냥 가는것보다 크다면 계속,
     if(end - start <= len) continue;
     // 도착위치와 지름길의 길이 삽입
+    // edges[출발위치].push([도착위치, 지름길 길이])
     edges[start].push([end, len]);
   }
   const pq = new PriorityQueue();
@@ -76,19 +77,25 @@ function solution(N, D, testInput) {
   dp[0] = 0;
   for(let start=0; start<=D; start++) {
     // dp[start]와 dp[start-1]에 1을 더한것 중 더 작은값 할당
-    
     if(start > 0) {
       dp[start] = Math.min(dp[start], dp[start-1] + 1);
     }
 
+    // start를 element로, dp[start]를 우선순위 쌍으로 삽입
     pq.enqueue(start, dp[start]);
     while(!pq.isEmpty()) {
+      // priority queue의 맨 앞 요소 shift
       const qe = pq.dequeue();
       const curPos = qe.element;
 
+      // 현재 노드의 다음 위치와 거리로 반복
       for(const [nextPos, nextDist] of edges[curPos]) {
+        // 다음위치가 현재 위치 + 지름길의 길이보다 크다면,
         if(dp[nextPos] > dp[curPos] + nextDist) {
+          // 지름길을 통한 길로 바꿔준다
           dp[nextPos] = dp[curPos] + nextDist;
+          // deque해서 맨 앞 요소를 빼서 비교했으므로,
+          // 원래 있던 값보다 더 최단거리를 삽입
           pq.enqueue(nextPos, dp[nextPos]);
         }
       }
