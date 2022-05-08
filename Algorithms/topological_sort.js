@@ -13,7 +13,7 @@ const N = 4; // 노드의 개수
 
 function topological_sort() {
   let graph = Array.from({length: N + 1}, () => []);
-  let inDegrees = Array(N + 1).fill(0);
+  let indegrees = Array(N + 1).fill(0);
   let queue = [];
   let result = [];
 
@@ -21,13 +21,13 @@ function topological_sort() {
     // from 노드와 이어져 있는 to 노드 추가
     graph[from].push(to);
     // to 노드와 이어져 있는 from 노드의 개수만큼 +1
-    inDegrees[to]++;
+    indegrees[to]++;
   }
 
   // inDegress가 0이라면 이전에 노드가 없는것이므로,
   // 시작 노드로 설정
-  for(let i=1; i<inDegrees.length; i++) {
-    if(inDegrees[i] === 0) queue.push(i);
+  for(let i=1; i<indegrees.length; i++) {
+    if(indegrees[i] === 0) queue.push(i);
   }
 
   while(queue.length) {
@@ -36,9 +36,9 @@ function topological_sort() {
 
     // from 노드로 부터 시작되는 다음 노드 순회
     for(const next of graph[from]) {
-      inDegrees[next]--;
+      indegrees[next]--;
 
-      if(inDegrees[next] === 0) queue.push(next);
+      if(indegrees[next] === 0) queue.push(next);
     }
   }
   
