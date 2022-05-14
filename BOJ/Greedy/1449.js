@@ -12,7 +12,7 @@ function solution(N, L, positions) {
   let start = positions.shift();
 
   for(const position of positions) {
-    if((0.5 + position + 0.5) > (L + start)) {
+    if((0.5 + position + 0.5 - start) > L) {
       result++;
       start = position;
     }
