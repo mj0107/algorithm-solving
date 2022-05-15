@@ -1,2 +1,4 @@
 *.exe
 *.txt
+.gitignore
+io_template.js
