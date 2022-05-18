@@ -1,11 +1,10 @@
+/* 단어 수학 */
 const fs = require('fs');
 const filePath = process.platform === 'linux' ? '/dev/stdin' : '../input.txt';
 // const filePath = process.platform === 'linux' ? '/dev/stdin' : 'BOJ/input.txt';
 const input = fs.readFileSync(filePath).toString().split(/\s+/);
 
 const N = input.shift();
-
-console.log(input);
 
 function solution(N, input) {
   const alphaArr = {};
