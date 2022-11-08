@@ -2,3 +2,4 @@
 *.txt
 .gitignore
 io_template.js
+.vscode
