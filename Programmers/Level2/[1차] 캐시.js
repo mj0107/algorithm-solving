@@ -12,7 +12,7 @@ function solution(cacheSize, cities) {
       cache.splice(cache.indexOf(CITY), 1);
     }
     // 캐시에 없다면
-    else answer += 5;
+    else answer += MISS;
 
     cache.push(CITY);
 
