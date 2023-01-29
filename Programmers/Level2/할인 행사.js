@@ -25,7 +25,7 @@ function initWantCountObject(want, number, wantCountMap) {
  * @param {number} start 회원 등록 일
  * @param {number} end 회원 자격이 끝나는 일
  */
-function updateMinusCount(wantCountMap, discount, start, end) {
+function updateWantCountMap(wantCountMap, discount, start, end) {
   let discountProduct = '';
   for (let i = start; i < end; i += 1) {
     discountProduct = discount[i];
@@ -61,7 +61,7 @@ function solution(want, number, discount) {
     [start, end] = [i, i + MEMBERSHIP_PERIOD];
 
     initWantCountObject(want, number, wantCountMap);
-    updateMinusCount(wantCountMap, discount, start, end);
+    updateWantCountMap(wantCountMap, discount, start, end);
 
     if (isPossibleDay(wantCountMap)) {
       result += 1;
