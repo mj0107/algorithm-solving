@@ -4,9 +4,6 @@
  * @return {boolean}
  */
  var backspaceCompare = function(s, t) {
-  let stackS = [];
-  let stackT = [];
-
   const stacking = (string, stack) => {
       string.split('').forEach((el) => {
           if(el === '#') {
